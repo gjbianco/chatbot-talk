@@ -1,0 +1,15 @@
+{
+  "name": "chatbot-talk",
+  "version": "1.0.0",
+  "description": "a talk about chatbots (mostly hubot)",
+  "main": "index.js",
+  "dependencies": {
+    "cleaver": "^0.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guy Bianco IV <gjbiancoiv@gmail.com>",
+  "license": "MIT"
+}
