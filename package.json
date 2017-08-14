@@ -8,7 +8,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node_modules/.bin/cleaver main.md",
+    "postinstall": "npm run build",
+    "start": "node_modules/.bin/cleaver watch main.md"
   },
   "author": "Guy Bianco IV <gjbiancoiv@gmail.com>",
   "license": "MIT"

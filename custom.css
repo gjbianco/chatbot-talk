@@ -1,0 +1,28 @@
+pre {
+  text-align: center;
+}
+.bigimage {
+  background-size: cover;
+}
+.darktext {
+  color: #444;
+}
+
+/* custom background images */
+.dock {
+  background-image: url('https://images.unsplash.com/photo-1427434869687-ab13f79ad4f1?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=82db0b68ab088fc28293fbe1ccc8f72f');
+}
+
+/* custom bullet emoji */
+ul {
+  list-style: none;
+}
+.bullet-star li:before {
+  content: "⭐️ ";
+}
+.bullet-point li:before {
+  content: "👉 ";
+}
+.bullet-redx li:before {
+  content: "❌ ";
+}
