@@ -589,8 +589,14 @@ pre .xml .cdata {
 pre {
   text-align: center;
 }
+.code pre {
+  text-align: left;
+}
 .bigimage {
   background-size: cover;
+}
+.ath {
+  background-image: url('http://i.imgur.com/NjrSlAD.gif');
 }
 .darktext {
   color: #444;
@@ -744,7 +750,7 @@ bin/hubot
 </section>
   </div>
   <div class="slide hidden" id="slide-26">
-    <section class="slide-content"><h1 id="remove-the-file-_hubot-scripts-json_">remove the file <em>hubot-scripts.json</em></h1>
+    <section class="slide-content"><h1 id="remove-the-file-hubot-scripts-json-">remove the file <code>hubot-scripts.json</code></h1>
 </section>
   </div>
   <div class="slide hidden  bullet-point" id="slide-27">
@@ -775,7 +781,497 @@ bin/hubot
 npm prune
 </pre></section>
   </div>
-  <div class="slide hidden author-slide" id="slide-30">
+  <div class="slide hidden" id="slide-30">
+    <section class="slide-content"><h1 id="try-running-your-bot-again">try running your bot again</h1>
+<p><pre>bin/hubot</pre></p>
+<h2 id="you-should-see-less-warnings">you should see less warnings</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-31">
+    <section class="slide-content"><h1 id="let-s-actually-build-something-">let&#39;s actually build something!</h1>
+<h2 id="don-t-worry-we-ll-start-small-small-small-small-small-small-small-">don&#39;t worry, we&#39;ll start <small><small><small>small</small></small></small></h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-32">
+    <section class="slide-content"><h1 id="we-ll-make-our-own-custom-response">we&#39;ll make our own custom response</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-33">
+    <section class="slide-content"><h1 id="we-can-put-our-own-scripts-in-the-scripts-directory">we can put our own scripts in the <code>scripts/</code> directory</h1>
+<h2 id="we-ll-ignore-example-coffee-for-now">we&#39;ll ignore <code>example.coffee</code> for now</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-34">
+    <section class="slide-content"><h1 id="create-scripts-response-js-">create <code>scripts/response.js</code></h1>
+<h2 id="-"> </h2>
+<pre>touch scripts/response.js</pre></section>
+  </div>
+  <div class="slide hidden  code" id="slide-35">
+    <section class="slide-content"><h3 id="scripts-response-js">scripts/response.js</h3>
+<pre>
+module.exports = function(robot) {
+  robot.hear(/ping/i, function(res) {
+    res.send('pong');
+  });
+};
+</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-36">
+    <section class="slide-content"><h1 id="let-s-break-down-this-snippet">let&#39;s break down this snippet</h1>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-37">
+    <section class="slide-content"><p><pre>
+module.exports = function(robot) {
+  ...
+};
+</pre></p>
+<ul>
+<li><code>module.exports</code> is kind of like the Node.js equivalent of <code>public</code></li>
+<li>here we are exposing a &quot;callback function&quot;</li>
+<li>the Hubot framework will call our function, passing a <code>robot</code> object</li>
+<li>we use that object to interact with the framework</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-38">
+    <section class="slide-content"><p><pre style="color: #555;">
+module.exports = function(robot) {
+</pre></p>
+<p><pre>
+  robot.hear(/ping/i, function(res) {
+    ...
+  });
+</pre></p>
+<p><pre style="color: #555;">
+};
+</pre></p>
+<ul>
+<li>accepts a RegEx/pattern and a callback function (foreshadowing!)</li>
+<li>callback is called with a &quot;response object&quot;</li>
+<li>registers our callback for Hubot to call whenever a message matches our pattern</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-39">
+    <section class="slide-content"><p><pre style="color: #555;">
+module.exports = function(robot) {
+  robot.hear(/ping/i, function(res) {
+</pre></p>
+<p><pre>
+    res.send(&#39;pong&#39;);
+</pre></p>
+<p><pre style="color: #555;">
+  });
+};
+</pre></p>
+<ul>
+<li>using our response object, send a reply with a message (&quot;pong&quot;)</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-40">
+    <section class="slide-content"><h1 id="let-s-try-running-our-bot-again">let&#39;s try running our bot again</h1>
+<pre>bin/hubot</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-41">
+    <section class="slide-content"><h1 id="we-need-to-enter-a-message-that-matches-our-string">we need to enter a message that matches our string</h1>
+<h2 id="-hint-anything-containing-ping-">(hint: anything containing &quot;ping&quot;)</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-42">
+    <section class="slide-content"><h1 id="your-bot-should-reply-simply-with-pong-">your bot should reply simply with &quot;pong&quot;</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-43">
+    <section class="slide-content"><h1 id="not-terribly-exciting-">not terribly exciting...</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-44">
+    <section class="slide-content"><h1 id="let-s-make-it-convert-br-currency-">let&#39;s make it convert <br> 🏦 currency 🏦</h1>
+<h2 id="-i-am-not-liable-for-any-quotes-information-accuracy-etc-just-saying-use-at-your-own-risk-">(i am not liable for any quotes, information accuracy, etc. just saying. use at your own risk.)</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-45">
+    <section class="slide-content"><h1 id="we-ll-use-a-free-api-from-http-fixer-io-">we&#39;ll use a free API from <a href="http://fixer.io/">http://fixer.io/</a></h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-46">
+    <section class="slide-content"><h1 id="their-api-is-pretty-easy-to-use-for-our-needs">their API is pretty easy to use for our needs</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-47">
+    <section class="slide-content"><h1 id="let-s-start-by-converting-usd-to-euro">let&#39;s start by converting USD  to Euro</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-48">
+    <section class="slide-content"><h1 id="we-need-to-call-their-api-to-get-the-current-rate">we need to call their API to get the current rate</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-49">
+    <section class="slide-content"><h1 id="we-ll-use-axios-to-make-the-call">we&#39;ll use <code>axios</code> to make the call</h1>
+<h2 id="node-s-built-in-http-lib-can-be-a-bit-much-for-those-who-are-new-to-it">Node&#39;s built in <code>http</code> lib can be a bit much for those who are new to it</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-50">
+    <section class="slide-content"><h1 id="just-add-axios-as-a-dependency">just add axios as a dependency</h1>
+<p><pre>npm install --save axios</pre></p>
+<h2 id="shortcut-npm-i-s-axios-">shortcut: <code>npm i -S axios</code></h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-51">
+    <section class="slide-content"><h1 id="now-let-s-make-a-new-file-scripts-currency-js-">now let&#39;s make a new file: <code>scripts/currency.js</code></h1>
+</section>
+  </div>
+  <div class="slide hidden  code" id="slide-52">
+    <section class="slide-content"><h3 id="scripts-currency-js">scripts/currency.js</h3>
+<pre>
+var http = require('axios');
+module.exports = function(robot) {
+  robot.respond(/convert/i, function(res) {
+    http.get('http://api.fixer.io/latest?base=USD')
+    .then(function(conversion) {
+      res.reply(conversion.data.rates.EUR);
+    });
+  });
+};
+</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-53">
+    <section class="slide-content"><h1 id="let-s-break-down-the-new-parts">let&#39;s break down the new parts</h1>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-54">
+    <section class="slide-content"><p><pre>var http = require(&#39;axios&#39;);</pre></p>
+<ul>
+<li>Node&#39;s way of importing</li>
+<li>we assign the axios lib to <code>http</code></li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-55">
+    <section class="slide-content"><p><pre>http.get(&#39;<a href="http://api.fixer.io/latest?base=USD">http://api.fixer.io/latest?base=USD</a>&#39;)</pre></p>
+<ul>
+<li>we are making a request to fixer.io</li>
+<li>we pass in our base currency</li>
+<li>this call is made asychronously</li>
+<li>you can hit the link in your browser to see the response</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-56">
+    <section class="slide-content"><p><pre>
+.then(function(conversion) {
+  ...
+});
+</pre></p>
+<ul>
+<li>anything with a <code>.then</code> function is (usually) a Promise</li>
+<li>we pass <code>.then</code> a function that gets called with the response object (conversion)</li>
+<li>we won&#39;t really get into Promises</li>
+<li>Promises make asynchronous programming fun</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden  code bullet-point" id="slide-57">
+    <section class="slide-content"><p><pre>res.reply(conversion.data.rates.EUR);</pre></p>
+<ul>
+<li>we&#39;ve kinda seen this</li>
+<li>res.reply uses the person&#39;s name</li>
+<li>note what we send back</li>
+<li>yay for native JSON</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-58">
+    <section class="slide-content"><h1 id="conversion-data-rates-eur">conversion.data.rates.EUR</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-59">
+    <section class="slide-content"><h1 id="conversion-span-style-color-red-span-data-span-style-color-red-span-rates-eur">conversion <span style="color: red;">|</span> .data <span style="color: red;">|</span> .rates.EUR</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-60">
+    <section class="slide-content"><h1 id="conversion-span-style-color-red-span-data-span-style-color-red-span-rates-eur-br-span-style-color-blue-span-our-code-nbsp-nbsp-nbsp-nbsp-span-style-color-blue-span-axios-nbsp-nbsp-nbsp-nbsp-nbsp-span-style-color-blue-span-fixer-io">conversion <span style="color: red;">|</span> .data <span style="color: red;">|</span> .rates.EUR <br> <span style="color: blue;">^</span>our code&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">^</span>axios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">^</span>fixer.io</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-61">
+    <section class="slide-content"><h1 id="let-s-test-our-bot-again">let&#39;s test our bot again</h1>
+<pre>bin/hubot</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-62">
+    <section class="slide-content"><h1 id="address-the-bot-with">address the bot with</h1>
+<pre>&lt;BOT NAME&gt; convert</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-63">
+    <section class="slide-content"><h1 id="responds-with-something-like">responds with something like</h1>
+<pre>Shell: 0.85492</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-64">
+    <section class="slide-content"><h1 id="we-can-do-better-">we can do better!</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-65">
+    <section class="slide-content"><h1 id="let-s-make-it-do-the-conversion-br-for-us-">let&#39;s make it do the conversion <br> 😎 for us 😎</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-66">
+    <section class="slide-content"><h3 id="plan-for-currency-bot">plan for currency bot</h3>
+<p> 💚 get the rate <br>
+ 💔 get user input <br>
+ 💔 do math and respond</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-67">
+    <section class="slide-content"><h1 id="regular-expressions">Regular Expressions</h1>
+<h2 id="foreshadowing-complete">foreshadowing complete</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-68">
+    <section class="slide-content"><h1 id="regexes-have-lots-of-math-and-theory-behind-them">RegExes have lots of math and theory behind them</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-69">
+    <section class="slide-content"><h1 id="we-re-gonna-ignore-most-of-that">we&#39;re gonna ignore most of that</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-70">
+    <section class="slide-content"><h1 id="topical-joke-">topical joke:</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-71">
+    <section class="slide-content"><h1 id="i-had-a-problem-">i had a problem,</h1>
+<h1 id="so-i-used-regular-expressions">so i used Regular Expressions</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-72">
+    <section class="slide-content"><h1 id="now-i-have-two-problems">now i have two problems</h1>
+<h2 id="topical-joke-complete">topical joke complete</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-73">
+    <section class="slide-content"><h1 id="there-are-several-flavors">there are several flavors</h1>
+<h2 id="we-ll-be-using-the-javascript-one">we&#39;ll be using the JavaScript one</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-74">
+    <section class="slide-content"><h1 id="in-js-they-take-the-form-">in JS, they take the form:</h1>
+<p><pre>/stuff/</pre></p>
+<h2 id="matches-anything-containing-stuff-">matches anything containing &quot;stuff&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-75">
+    <section class="slide-content"><h1 id="lots-of-characters-are-not-literal">lots of characters are not literal</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-76">
+    <section class="slide-content"><h1 id="e-g-dot-period-full-stop-">e.g. dot/period/full stop (.)</h1>
+<h2 id="matches-any-character">matches any character</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-77">
+    <section class="slide-content"><h1 id="-st-ff-">/st.ff/</h1>
+<h2 id="matches-stuff-staff-stbff-st-ff-etc-">matches &quot;stuff&quot;, &quot;staff&quot;, &quot;stbff&quot;, &quot;st&amp;ff&quot;, etc.</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-78">
+    <section class="slide-content"><h1 id="caret-matches-the-beginning-of-the-string">caret (^) matches the beginning of the string</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-79">
+    <section class="slide-content"><h1 id="-stuff-">/^stuff/</h1>
+<h2 id="matches-stuff-i-ve-said-">matches: &quot;stuff i&#39;ve said&quot;</h2>
+<h2 id="does-not-match-other-stuff-">does NOT match: &quot;other stuff&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-80">
+    <section class="slide-content"><h1 id="dollar-sign-matches-the-end-of-the-string">dollar sign ($) matches the end of the string</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-81">
+    <section class="slide-content"><h1 id="-stuff-">/stuff$/</h1>
+<h2 id="matches-other-stuff-">matches: &quot;other stuff&quot;</h2>
+<h2 id="does-not-match-stuff-i-ve-said-">does NOT match: &quot;stuff i&#39;ve said&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-82">
+    <section class="slide-content"><h1 id="you-can-combine-them-to-be-very-specific">you can combine them to be very specific</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-83">
+    <section class="slide-content"><h1 id="-stuff-">/^stuff$/</h1>
+<h2 id="the-only-string-that-can-match-is-stuff-">the only string that can match is &quot;stuff&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-84">
+    <section class="slide-content"><h1 id="asterisk-allows-you-to-have-none-or-many">asterisk (*) allows you to have none or many</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-85">
+    <section class="slide-content"><h1 id="-stu-ff-">/stu*ff/</h1>
+<h2 id="matches-stff-stuff-stuuff-stuuuuuuuuuuuff-">matches: &quot;stff&quot;, &quot;stuff&quot;, &quot;stuuff&quot;, &quot;stuuuuuuuuuuuff&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-86">
+    <section class="slide-content"><h1 id="fun-combination-with-period">fun combination with period</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-87">
+    <section class="slide-content"><h1 id="-st-ff-">/st.*ff/</h1>
+<h2 id="matches-stff-stuff-stlkhfsd9863-33asdflff-">matches: &quot;stff&quot;, &quot;stuff&quot;, &quot;stlkhfsd9863^(&amp;(*&amp;33asdflff&quot;</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-88">
+    <section class="slide-content"><h1 id="you-can-set-up-groups-with-parentheses-s-and-s-">you can set up groups with parentheses ( (&#39;s and )&#39;s )</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-89">
+    <section class="slide-content"><h1 id="by-default-groups-are-_capturing-groups_">by default, groups are <em>capturing groups</em></h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-90">
+    <section class="slide-content"><h1 id="basically-able-to-extract-matching-parts-of-the-string">basically, able to extract matching parts of the string</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-91">
+    <section class="slide-content"><h1 id="-convert-">/^convert (.*)/</h1>
+<h2 id="matches-convert-stuff-stuff-convert-4-50-4-50-">matches: &quot;convert stuff&quot; (stuff), &quot;convert 4.50&quot; (4.50)</h2>
+</section>
+  </div>
+  <div class="slide hidden  code" id="slide-92">
+    <section class="slide-content"><h1 id="remember-how-hear-and-respond-take-a-pattern-">remember how <code>.hear</code> and <code>.respond</code> take a pattern?</h1>
+<pre>robot.hear(/ping/i, function(res) {</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-93">
+    <section class="slide-content"><h1 id="let-s-tweak-our-pattern-in-currency-js-">let&#39;s tweak our pattern in <code>currency.js</code></h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-94">
+    <section class="slide-content"><pre>
+robot.respond(/^convert (.*)/i, function(res) {
+  http.get('http://api.fixer.io/latest?base=USD')
+  .then(function(conversion) {
+    res.reply(conversion.data.rates.EUR);
+  });
+});
+</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-95">
+    <section class="slide-content"><h1 id="-res-match-is-an-array-with-our-pattern-matches"><code>res.match</code> is an array with our pattern matches</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-96">
+    <section class="slide-content"><h1 id="this-means-res-match-1-refers-to-the-part-of-the-input-string-that-matches-our-group">this means <code>res.match[1]</code> refers to the part of the input string that matches our group</h1>
+<h2 id="-res-match-0-is-always-the-entire-string"><code>res.match[0]</code> is always the entire string</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-97">
+    <section class="slide-content"><h1 id="let-s-make-our-bot-respond-with-whatever-you-tell-it-to-convert">let&#39;s make our bot respond with whatever you tell it to convert</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-98">
+    <section class="slide-content"><pre>
+robot.respond(/^convert (.*)/i, function(res) {
+  http.get('http://api.fixer.io/latest?base=USD')
+  .then(function(conversion) {
+    res.reply(res.match[1]);
+  });
+});
+</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-99">
+    <section class="slide-content"><h1 id="fire-up-the-bot">fire up the bot</h1>
+<pre>bin/hubot</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-100">
+    <section class="slide-content"><h1 id="tell-it-to-convert-something">tell it to convert something</h1>
+<pre>&lt;BOT NAME&gt; convert 4.50</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-101">
+    <section class="slide-content"><h1 id="it-responds-with-shell-4-50-">it responds with <code>Shell: 4.50</code></h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-102">
+    <section class="slide-content"><h3 id="plan-for-currency-bot">plan for currency bot</h3>
+<p> 💚 get the rate <br>
+ 💚 get user input <br>
+ 💔 do math and respond</p>
+</section>
+  </div>
+  <div class="slide hidden  bigimage ath" id="slide-103">
+    <section class="slide-content"><p><span></span></p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-104">
+    <section class="slide-content"><h1 id="just-multiply-user-input-by-the-rate-from-fixer-io">just multiply user input by the rate from fixer.io</h1>
+<pre>res.match[1] * conversion.data.rates.EUR</pre></section>
+  </div>
+  <div class="slide hidden  code" id="slide-105">
+    <section class="slide-content"><h3 id="altogether-">altogether!</h3>
+<pre>
+robot.respond(/convert (.*)/i, function(res) {
+  http.get('http://api.fixer.io/latest?base=USD')
+  .then(function(conversion) {
+    res.reply(res.match[1] * conversion.data.rates.EUR);
+  });
+});
+</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-106">
+    <section class="slide-content"><h1 id="let-s-see-what-the-bot-says">let&#39;s see what the bot says</h1>
+<pre>bin/hubot</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-107">
+    <section class="slide-content"><h1 id="now-tell-it-to-convert-something">now tell it to convert something</h1>
+<pre>&lt;BOT NAME&gt; convert 4.50</pre></section>
+  </div>
+  <div class="slide hidden" id="slide-108">
+    <section class="slide-content"><h1 id="you-should-get-something-close-to-3-84">you should get something close to 3.84</h1>
+<h2 id="unless-either-the-us-or-europe-is-screwed">unless either the US or Europe is screwed</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-109">
+    <section class="slide-content"><h3 id="plan-for-currency-bot">plan for currency bot</h3>
+<p> 💚 get the rate <br>
+ 💚 get user input <br>
+ 💚 math and respond</p>
+<h2 id="bot-completed">bot completed</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-110">
+    <section class="slide-content"><h1 id="there-is-some-obvious-room-for-improvement-">there is some obvious room for improvement!</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-111">
+    <section class="slide-content"><h1 id="what-about-actually-hooking-this-up-">what about actually hooking this up?</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-112">
+    <section class="slide-content"><h1 id="you-do-need-to-host-the-bot-server-somewhere">you do need to host the bot server somewhere</h1>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-113">
+    <section class="slide-content"><h3 id="hosting">hosting</h3>
+<ul>
+<li>OpenShift</li>
+<li>Heroku</li>
+<li>Digital Ocean</li>
+<li>AWS</li>
+<li>a Raspberry Pi</li>
+<li>anything else that runs Node.js</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-114">
+    <section class="slide-content"><h1 id="just-make-sure-you-have-the-correct-adapter-s-">just make sure you have the correct adapter(s)</h1>
+<h2 id="each-chat-service-has-their-own-instructions">each chat service has their own instructions</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-115">
+    <section class="slide-content"><h1 id="hopefully-i-ve-inspired-you-to-go-make-your-own-bots-">hopefully, i&#39;ve inspired you to go make your own bots 🤘</h1>
+</section>
+  </div>
+  <div class="slide hidden author-slide" id="slide-116">
     <section class="slide-content"><div class="author">
   <h1 class="name">Guy Bianco IV</h1>
     <h3 class="twitter">
@@ -783,6 +1279,9 @@ npm prune
     </h3>
     <h3 class="url">
       <a href="http://gbianco.com">http://gbianco.com</a>
+    </h3>
+    <h3 class="email">
+      <a href="mailto:gbianco@redhat.com">gbianco@redhat.com</a>
     </h3>
 </div>
 </section>
