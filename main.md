@@ -334,7 +334,7 @@ module.exports = function(robot) {
 <pre>robot.hear(/ping/i, function(res) {</pre>
 --
 # let's tweak our pattern in `currency.js`
---
+-- code
 <pre>
 robot.respond(/^convert (.*)/i, function(res) {
   http.get('http://api.fixer.io/latest?base=USD')
@@ -350,7 +350,7 @@ robot.respond(/^convert (.*)/i, function(res) {
 ## `res.match[0]` is always the entire string
 --
 # let's make our bot respond with whatever you tell it to convert
---
+-- code
 <pre>
 robot.respond(/^convert (.*)/i, function(res) {
   http.get('http://api.fixer.io/latest?base=USD')
