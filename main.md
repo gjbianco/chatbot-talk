@@ -429,3 +429,5 @@ robot.respond(/convert (.*)/i, function(res) {
 ## each chat service has their own instructions
 --
 # hopefully, i've inspired you to go make your own bots 🤘
+--
+# 🌞 enjoy the eclipse (safely)! 🌖 
