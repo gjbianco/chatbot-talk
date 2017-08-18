@@ -11,6 +11,9 @@ style: 'custom.css'
 --
 # 🤖 chatbots and you 🤓
 --
+# slides and example bot <br> https://github.com/gjbianco/chatbot-talk
+## we'll be building up the same bot
+--
 # what do we mean by _chatbot_?
 --
 # connects to your chat platform
@@ -57,7 +60,7 @@ yo hubot
  * owner -> your info
  * bot name -> "hubot" will NOT work!
  * description -> default is fine
- * bot adapter -> gitter
+ * bot adapter -> slack
 --
 # adapters define what platform Hubot is talking to
 ## e.g. Slack, gitter, shell, etc.
@@ -414,6 +417,13 @@ robot.respond(/convert (.*)/i, function(res) {
  * AWS
  * a Raspberry Pi
  * anything else that runs Node.js
+--
+# currently running on Digital Ocean
+--
+# i've also got a slack instance set up with the integration
+--
+# let's take a look at it running
+## make sure bot is invited to the room!
 --
 # just make sure you have the correct adapter(s)
 ## each chat service has their own instructions
