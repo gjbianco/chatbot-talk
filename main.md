@@ -372,8 +372,6 @@ robot.respond(/^convert (.*)/i, function(res) {
  💚 get the rate <br>
  💚 get user input <br>
  💔 do math and respond
--- bigimage ath
-<span></span>
 --
 # just multiply user input by the rate from fixer.io
 <pre>res.match[1] * conversion.data.rates.EUR</pre>
