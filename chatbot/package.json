@@ -4,6 +4,9 @@
   "private": true,
   "author": "Guy Bianco IV <gbianco@redhat.com>",
   "description": "A simple helpful example robot",
+  "scripts": {
+    "start": "./bin/hubot -a gitter"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "hubot": "^2.19.0",
